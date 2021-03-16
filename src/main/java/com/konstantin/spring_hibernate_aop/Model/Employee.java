@@ -18,36 +18,35 @@ import javax.persistence.Table;
  * @author JavaDev
  */
 @Entity
-@Table(name = "")//need to name it
+@Table(name = "employees")
 public class Employee {
 
-    public Employee(String name, String email, String department, int salary) {
+    public Employee(String name, String surnname, String email, String department, int salary) {
         this.name = name;
+        this.surnname = surnname;
         this.email = email;
         this.department = department;
         this.salary = salary;
-    }
-
-    @Override
-    public String toString() {
-        return "Employee{" + "id=" + id + ", name=" + name + ", email=" + email + ", department=" + department + ", salary=" + salary + '}';
-    }
-
-
-    public Employee() {
-    }
+    } 
 
     @Id
     @Column(name = "id")
     @GeneratedValue(generator = "myGenerator",strategy = GenerationType.SEQUENCE)
-    @SequenceGenerator( name = "myGenerator",sequenceName = "")//need to name it
+    @SequenceGenerator( name = "myGenerator",sequenceName = "my_sequence", allocationSize = 1)
     private int id;
+    
     @Column(name = "name")
     private String name;
+    
+    @Column(name = "surname")
+    private String surnname;
+    
     @Column(name = "email")
     private String email;
+    
     @Column(name = "department")
     private String department;
+    
     @Column(name = "salary")
     private int salary;
     
@@ -78,6 +77,21 @@ public class Employee {
 
     public int getSalary() {
         return salary;
+    }
+    public Employee() {
+    }
+
+    @Override
+    public String toString() {
+        return "Employee{" + "name=" + name + ", surnname=" + surnname + ", email=" + email + ", department=" + department + ", salary=" + salary + '}';
+    }
+
+    public String getSurnname() {
+        return surnname;
+    }
+
+    public void setSurnname(String surnname) {
+        this.surnname = surnname;
     }
 
     public void setSalary(int salary) {
