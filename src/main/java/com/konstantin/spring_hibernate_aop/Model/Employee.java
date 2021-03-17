@@ -83,8 +83,10 @@ public class Employee {
 
     @Override
     public String toString() {
-        return "Employee{" + "name=" + name + ", surnname=" + surnname + ", email=" + email + ", department=" + department + ", salary=" + salary + '}';
+        return "Employee{" + "id=" + id + ", name=" + name + ", surnname=" + surnname + ", email=" + email + ", department=" + department + ", salary=" + salary + '}';
     }
+
+    
 
     public String getSurnname() {
         return surnname;

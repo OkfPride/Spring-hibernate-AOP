@@ -15,6 +15,7 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.ModelAttribute;
 
 /**
  *
@@ -23,28 +24,50 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class EmployeeDAO implements IEmplDAO {
 
-   
     private SessionFactory sessionFactory;
 
     @Autowired
     public EmployeeDAO(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
- 
-    @Override 
-    public void addEmployee() {
+
+    @Override
+    public Employee addEmployee() {
         Employee employee = new Employee();
+//        Session currentSession = sessionFactory.getCurrentSession();
+//        currentSession.update("insert Employee", Employee.class);
+        return employee;
     }
 
     @Override
-    @Transactional
     public List<Employee> showAllEmployees() {
-        System.out.println("check2");
         Session currentSession = sessionFactory.getCurrentSession();
         Query createQuery = currentSession.createQuery("from Employee", Employee.class);
         List resultList = createQuery.getResultList();
-        System.out.println(resultList); 
         return resultList;
+
 //return null;
+    }
+
+    @Override
+    public void saveEmployee(Employee employee) {
+        Session currentSession = sessionFactory.getCurrentSession();
+        System.out.println("EMPL id = " + employee);
+        currentSession.saveOrUpdate(employee);
+
+    }
+
+    @Override
+    public void deleteEmployee(Employee employee) {
+        sessionFactory.getCurrentSession().delete(employee);
+    }
+
+    public Employee getEmployee(int id) {
+        Session currentSession = sessionFactory.getCurrentSession();
+        Employee get = currentSession.get(Employee.class, id);
+//        Query createQuery = currentSession.createQuery("from Employee", Employee.class);
+//        createQuery.setParameter("id", id);
+//        createQuery.getSingleResult();
+        return get;
     }
 }

@@ -16,6 +16,13 @@ import org.springframework.ui.Model;
 public interface IEmplDAO {
 
     List<Employee> showAllEmployees();
-    void addEmployee(); 
+
+    Employee addEmployee();
+    
+    void saveEmployee(Employee employee);
+    
+    Employee getEmployee(int id);
+
+    public void deleteEmployee(Employee employee);
 
 }
